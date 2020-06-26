@@ -22,6 +22,52 @@
 //
 // The following code will fail by default. Your goal is to get it to run, and output the values specified at the end:
 
+class Book {
+  constructor(t, g, a, r) {
+      this.title = t;
+      this.genre = g;
+      this.author = a;
+      this.isRead = r || false;
+  }
+}
+
+class BookList {
+  // Code here
+  constructor() {
+    this.books = [];
+    this.lastRead = null;
+    this.currentlyReading = null;
+  }
+
+  add(book) {
+    this.books.push(book);
+    if (this.currentlyReading === null) this.currentlyReading = book;
+  }
+
+  getNumRead() {
+    let count = 0;
+    this.books.forEach(book => {
+      if (book.isRead === true) count++;
+    });
+    return count;
+  }
+
+  getNumUnread() {
+    let count = 0;
+    this.books.forEach(book => {
+      if (book.isRead === false) count++;
+    });
+    return count;
+  }
+}
+
+
+let book1 = new Book('Scary Book', 'Horror', 'David Lych');
+let book2 = new Book('Romantic Book', 'Romance', 'Sarah Hutch');
+let book3 = new Book('To Be or Not To Be', 'Philosophy', 'Shakespeare', true);
+let book4 = new Book('Scary Book 2', 'Horror', 'David Lych');
+let book5 = new Book('Romantic Book The Sequel', 'Romance', 'Sarah Hutch');
+
 const homeLibrary = new BookList();
 
 // Books are unread by default:
@@ -32,7 +78,7 @@ homeLibrary.add(new Book('American Gods', 'Fiction', 'Neil Gaiman'));
 homeLibrary.add(
   new Book('Eloquent JavaScript', 'Programming', 'Marijn Haverbeke', true)
 );
-
+console.log(homeLibrary);
 // At this point, we should have 2 unread books, and 1 read book:
 console.log(homeLibrary.getNumUnread()); // 2
 console.log(homeLibrary.getNumRead()); // 1
